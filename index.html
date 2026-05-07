@@ -258,11 +258,35 @@ table.ct tr.cx td{background:rgba(196,136,58,0.1);color:var(--copper-light);font
   /* Crossover */
   .contract-grid{grid-template-columns:1fr;}
   .cr-val{font-size:2rem;}
+  #page-crossover .page-inner > div[style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr!important;}
+  #page-crossover .page-inner > div[style*="grid-template-columns:1fr 1fr"] > div[style*="flex-direction:column"]{flex-direction:column;}
   .site-footer{padding:1rem;font-size:11px;}
 }
 @media(max-width:400px){
   .s2-title{font-size:1.4rem;}
   .nav-tab{padding:0 0.5rem;font-size:10px;}
+}
+
+/* ── Head-to-head cards ── */
+.hth-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.85rem;}
+.hth-metric{background:var(--sv-surface2);border:1px solid var(--sv-border);border-radius:8px;padding:1rem 1.1rem;}
+.hth-label{font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--sv-ink3);margin-bottom:0.65rem;}
+.hth-row{display:flex;align-items:center;gap:0.4rem;margin-bottom:0.4rem;flex-wrap:nowrap;}
+.hth-side{flex:1;text-align:center;min-width:0;}
+.hth-tag{font-family:'Barlow Condensed',sans-serif;font-size:9px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--sv-ink3);margin-bottom:2px;}
+.hth-tag.b{color:var(--sv-copper);}
+.hth-val{font-family:'Playfair Display',serif;font-weight:900;line-height:1;}
+.hth-val.a{font-size:1.2rem;color:var(--sv-ink3);}
+.hth-val.b{font-size:1.45rem;color:var(--sv-copper-dark);}
+.hth-arrow{font-size:13px;color:var(--sv-border2);flex-shrink:0;}
+.hth-delta{font-family:'Barlow Condensed',sans-serif;font-size:11.5px;font-weight:700;letter-spacing:0.05em;padding:3px 7px;border-radius:3px;white-space:nowrap;flex-shrink:0;}
+.hth-delta.pos{background:var(--sv-green-pale);color:var(--sv-green);}
+.hth-delta.neg{background:var(--sv-copper-pale);color:var(--sv-copper-dark);}
+.hth-note{font-size:11px;color:var(--sv-ink3);font-style:italic;}
+@media(max-width:768px){
+  .hth-grid{grid-template-columns:1fr;}
+  .hth-val.a{font-size:1.05rem;}
+  .hth-val.b{font-size:1.25rem;}
 }
 </style>
 </head>
@@ -275,7 +299,7 @@ table.ct tr.cx td{background:rgba(196,136,58,0.1);color:var(--copper-light);font
       <div class="nav-tab active" onclick="showPage('summary',this)">Summary</div>
       <div class="nav-tab" onclick="showPage('equipment',this)">Equipment</div>
       <div class="nav-tab" onclick="showPage('roi',this)">5-Year ROI <span class="nav-badge">Live</span></div>
-      <div class="nav-tab" onclick="showPage('crossover',this)">Crossover</div>
+      <div class="nav-tab" onclick="showPage('crossover',this)">Profits &amp; Upside</div>
     </div>
   </div>
 </nav>
@@ -387,43 +411,49 @@ table.ct tr.cx td{background:rgba(196,136,58,0.1);color:var(--copper-light);font
 
     </div>
 
-    <!-- Visual comparison bars -->
+    <!-- Head-to-head stat cards -->
     <div class="s2-compare">
       <div class="s2-compare-title">Head-to-Head Comparison</div>
-      <div class="s2-bar-row">
-        <div class="s2-bar-lbl">Startup Cost</div>
-        <div class="s2-bars">
-          <div class="s2-bar-track"><div class="s2-bar-bg"><div class="s2-bar-fill a" style="width:83%"></div></div><div class="s2-bar-val a">$2.87M</div></div>
-          <div class="s2-bar-sub">Setup A</div>
-          <div class="s2-bar-track"><div class="s2-bar-bg"><div class="s2-bar-fill b" style="width:100%"></div></div><div class="s2-bar-val b">$3.45M</div></div>
-          <div class="s2-bar-sub b">Setup B ★</div>
+      <div class="hth-grid">
+        <div class="hth-metric">
+          <div class="hth-label">Startup Cost</div>
+          <div class="hth-row">
+            <div class="hth-side a"><div class="hth-tag">Setup A</div><div class="hth-val a">$2.87M</div></div>
+            <div class="hth-arrow">&#8594;</div>
+            <div class="hth-side b"><div class="hth-tag b">Setup B &#9733;</div><div class="hth-val b">$3.45M</div></div>
+            <div class="hth-delta neg">+$579K</div>
+          </div>
+          <div class="hth-note">One-time investment difference</div>
         </div>
-      </div>
-      <div class="s2-bar-row">
-        <div class="s2-bar-lbl">5-Yr Net Profit</div>
-        <div class="s2-bars">
-          <div class="s2-bar-track"><div class="s2-bar-bg"><div class="s2-bar-fill a" style="width:72%"></div></div><div class="s2-bar-val a">$8.27M</div></div>
-          <div class="s2-bar-sub">Setup A</div>
-          <div class="s2-bar-track"><div class="s2-bar-bg"><div class="s2-bar-fill b" style="width:100%"></div></div><div class="s2-bar-val b">$11.50M</div></div>
-          <div class="s2-bar-sub b">Setup B ★</div>
+        <div class="hth-metric">
+          <div class="hth-label">5-Year Net Profit</div>
+          <div class="hth-row">
+            <div class="hth-side a"><div class="hth-tag">Setup A</div><div class="hth-val a">$8.27M</div></div>
+            <div class="hth-arrow">&#8594;</div>
+            <div class="hth-side b"><div class="hth-tag b">Setup B &#9733;</div><div class="hth-val b">$11.50M</div></div>
+            <div class="hth-delta pos">+$3.23M</div>
+          </div>
+          <div class="hth-note">After deducting startup costs</div>
         </div>
-      </div>
-      <div class="s2-bar-row">
-        <div class="s2-bar-lbl">$/Gal Capacity</div>
-        <div class="s2-bars">
-          <div class="s2-bar-track"><div class="s2-bar-bg"><div class="s2-bar-fill a" style="width:100%"></div></div><div class="s2-bar-val a">$1,445</div></div>
-          <div class="s2-bar-sub">Setup A — higher cost per gallon</div>
-          <div class="s2-bar-track"><div class="s2-bar-bg"><div class="s2-bar-fill b" style="width:62%"></div></div><div class="s2-bar-val b">$892</div></div>
-          <div class="s2-bar-sub b">Setup B — 38% cheaper/gal ★</div>
+        <div class="hth-metric">
+          <div class="hth-label">Equipment $/Gal Capacity</div>
+          <div class="hth-row">
+            <div class="hth-side a"><div class="hth-tag">Setup A</div><div class="hth-val a">$1,445</div></div>
+            <div class="hth-arrow">&#8594;</div>
+            <div class="hth-side b"><div class="hth-tag b">Setup B &#9733;</div><div class="hth-val b">$892</div></div>
+            <div class="hth-delta pos">&#8722;38%</div>
+          </div>
+          <div class="hth-note">Setup B is more capital-efficient per gallon</div>
         </div>
-      </div>
-      <div class="s2-bar-row">
-        <div class="s2-bar-lbl">Annual Bottles</div>
-        <div class="s2-bars">
-          <div class="s2-bar-track"><div class="s2-bar-bg"><div class="s2-bar-fill a" style="width:50%"></div></div><div class="s2-bar-val a">378K</div></div>
-          <div class="s2-bar-sub">Setup A at full capacity</div>
-          <div class="s2-bar-track"><div class="s2-bar-bg"><div class="s2-bar-fill b" style="width:100%"></div></div><div class="s2-bar-val b">756K</div></div>
-          <div class="s2-bar-sub b">Setup B — 2× capacity ★</div>
+        <div class="hth-metric">
+          <div class="hth-label">Annual Bottle Capacity</div>
+          <div class="hth-row">
+            <div class="hth-side a"><div class="hth-tag">Setup A</div><div class="hth-val a">378K</div></div>
+            <div class="hth-arrow">&#8594;</div>
+            <div class="hth-side b"><div class="hth-tag b">Setup B &#9733;</div><div class="hth-val b">756K</div></div>
+            <div class="hth-delta pos">2&#215; output</div>
+          </div>
+          <div class="hth-note">Single shift, 5 days/week</div>
         </div>
       </div>
     </div>
@@ -492,7 +522,7 @@ table.ct tr.cx td{background:rgba(196,136,58,0.1);color:var(--copper-light);font
           <tr><td>Water plumbing</td><td class="r">$100,000</td><td class="r">$100,000</td><td class="r dz">—</td></tr>
           <tr><td>Electrical (general — excludes grain handling electrical)</td><td class="r">$100,000</td><td class="r">$100,000</td><td class="r dz">—</td></tr>
           <tr><td>Grain handling mechanical install (electrical TBD, additional)</td><td class="r">$60,000</td><td class="r">$60,000</td><td class="r dz">—</td></tr>
-          <tr><td>Bridgetown install &amp; commissioning (2 trips + startup/training)</td><td class="r">$40,000</td><td class="r">$40,000</td><td class="r dz">—</td></tr>
+          <tr><td>Bridgetown install &amp; commissioning (2 trips including startup/training)</td><td class="r">$40,000</td><td class="r">$40,000</td><td class="r dz">—</td></tr>
           <tr class="tot"><td>Installation Subtotal</td><td class="r">$521,000</td><td class="r">$550,000</td><td class="r dp">+$29,000</td></tr>
           <tr class="grand"><td>TOTAL PROJECT COST</td><td class="r">$2,869,000</td><td class="r gold">$3,448,321</td><td class="r dp">+$579,321</td></tr>
         </tbody>
@@ -601,58 +631,88 @@ table.ct tr.cx td{background:rgba(196,136,58,0.1);color:var(--copper-light);font
   </div>
 </div>
 
-<!-- ══════════ PAGE 4: CROSSOVER ══════════ -->
+<!-- ══════════ PAGE 4: PROFITS & UPSIDE ══════════ -->
 <div id="page-crossover" class="page">
   <div class="page-inner">
+
     <div class="page-hd">
-      <div class="section-eyebrow">Crossover Analysis &amp; Contract Distilling</div>
-      <div class="page-h1">When Does Setup B Pay Off Faster?</div>
-      <div class="page-sub">Payback in months at uniform sell-through. Setup B beats Setup A at ≥60% sell-through.</div>
+      <div class="section-eyebrow">Profit Analysis &amp; Revenue Upside</div>
+      <div class="page-h1">Annual Profit by Sales Volume</div>
+      <div class="page-sub">Below Setup A's ceiling the only gap is overhead ($120K/yr). Above it, Setup A is capped — Setup B keeps climbing.</div>
     </div>
 
-    <div class="ct-wrap">
-      <table class="ct">
-        <thead><tr><th>Sell-Through %</th><th>Setup A Payback</th><th>Setup B Payback</th><th>Context</th></tr></thead>
-        <tbody>
-          <tr><td>20%</td><td>n/a (operating loss)</td><td class="better">n/a (operating loss)</td><td>Just getting started</td></tr>
-          <tr><td>30%</td><td>54 mo</td><td class="better">22 mo</td><td>Building distribution</td></tr>
-          <tr><td>40%</td><td>31 mo</td><td class="better">14 mo</td><td>Setup A at 80% vol. equiv.</td></tr>
-          <tr><td>50%</td><td>22 mo</td><td class="better">11 mo</td><td>Moderate traction</td></tr>
-          <tr class="cx"><td>60% <span class="cxn">← crossover</span></td><td>17 mo</td><td class="better">8 mo</td><td>Avg craft distillery</td></tr>
-          <tr><td>70%</td><td>14 mo</td><td class="better">7 mo</td><td>Good distribution</td></tr>
-          <tr><td>80%</td><td>12 mo</td><td class="better">6 mo</td><td>Strong operation</td></tr>
-          <tr><td>90%</td><td>10 mo</td><td class="better">5 mo</td><td>Very strong</td></tr>
-          <tr><td>100%</td><td>9 mo</td><td class="better">5 mo</td><td>Selling everything</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="section-eyebrow" style="margin-bottom:0.5rem;">Contract Distilling Calculator — Setup B Upside</div>
-    <p style="font-size:13px;color:var(--steel-light);margin-bottom:1.25rem;line-height:1.6;max-width:680px;">Setup B's unused capacity can generate contract revenue. <strong style="color:var(--copper-light)">Not included in P&amp;L projections</strong> — represents additional unmodeled upside unique to Setup B.</p>
-
-    <div class="contract-grid">
-      <div class="ci">
-        <div class="fl"><div class="fl-l">Contract runs per week</div><input class="cn-inp" type="number" id="cRuns" value="2" min="1" max="5" oninput="updateContract()"><div style="font-size:11px;color:var(--steel-light);margin-top:4px;">Conservative: 2 of 5 available run days</div></div>
-        <div class="fl"><div class="fl-l">Revenue per proof gallon ($/PG)</div><input class="cn-inp" type="number" id="cRate" value="16" min="5" max="25" step="0.5" oninput="updateContract()"><div style="font-size:11px;color:var(--steel-light);margin-top:4px;">Spreadsheet default: $16/PG</div></div>
-        <div class="fl"><div class="fl-l">Proof gallons per big-still run</div><input class="cn-inp" type="number" id="cPG" value="360" min="200" max="1200" step="10" oninput="updateContract()"><div style="font-size:11px;color:var(--steel-light);margin-top:4px;">2,000G still × 0.18 yield (conservative)</div></div>
-      </div>
-      <div class="cr">
-        <div class="cr-lbl">Est. Annual Contract Revenue</div>
-        <div class="cr-val" id="contractRevenue">$576,000</div>
-        <div class="cr-note">runs/wk × $/PG × PG/run × 50 weeks</div>
-        <hr style="border:none;border-top:1px solid var(--border);margin:1rem 0;">
-        <div style="font-size:13px;color:var(--steel-light);">At $576K/yr, this adds <strong style="color:var(--copper-light)">~$2.88M</strong> over 5 years — not in the ROI model.</div>
+    <div class="chart-blk" style="margin-bottom:2rem;">
+      <div class="chart-wrap" style="padding:1.5rem;">
+        <div style="position:relative;height:300px;"><canvas id="volChart"></canvas></div>
+        <div style="display:flex;align-items:center;gap:1.5rem;margin-top:1rem;flex-wrap:wrap;">
+          <div style="display:flex;align-items:center;gap:6px;"><div style="width:20px;height:3px;background:#7A7068;border-radius:2px;"></div><span style="font-family:'Barlow Condensed',sans-serif;font-size:12px;color:var(--steel-light);">Setup A Annual Profit</span></div>
+          <div style="display:flex;align-items:center;gap:6px;"><div style="width:20px;height:3px;background:var(--copper);border-radius:2px;"></div><span style="font-family:'Barlow Condensed',sans-serif;font-size:12px;color:var(--copper-light);">Setup B Annual Profit</span></div>
+          <div style="display:flex;align-items:center;gap:6px;"><div style="width:10px;height:10px;border-right:2px dashed rgba(196,136,58,0.6);"></div><span style="font-family:'Barlow Condensed',sans-serif;font-size:12px;color:var(--steel-light);">Setup A single-shift ceiling (378K)</span></div>
+        </div>
       </div>
     </div>
 
-    <div class="eq-card">
-      <div class="section-eyebrow" style="margin-bottom:0.75rem;">Volume Discount — Setup B Upside (from model Section 8)</div>
-      <p style="font-size:13px;color:#C0B8A8;line-height:1.7;">At 2× production volume, Setup B is positioned to negotiate a 5–10% discount on raw materials and packaging (not applied to FET). At 5%: fully-loaded cost drops from $8.26 to <strong style="color:var(--copper-light);">$7.97/bottle</strong>, saving ~$223,734/year — an additional $1.12M over 5 years, also not included in the base P&amp;L.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-bottom:1.25rem;">
+
+      <!-- Cost per bottle (Section 8) -->
+      <div class="eq-card">
+        <div class="section-eyebrow" style="margin-bottom:0.75rem;">Fully-Loaded Cost Per Bottle</div>
+        <p style="font-size:12.5px;color:#B0A898;line-height:1.6;margin-bottom:1rem;">Variable cost is identical for both setups. The gap is fixed overhead divided over more bottles — Setup B wins at scale.</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-bottom:1rem;">
+          <div style="background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:6px;padding:0.85rem;text-align:center;">
+            <div style="font-family:'Barlow Condensed',sans-serif;font-size:9px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--steel-light);margin-bottom:4px;">Setup A / bottle</div>
+            <div style="font-family:'Playfair Display',serif;font-size:1.55rem;font-weight:700;color:var(--cream);">$9.29</div>
+            <div style="font-size:10.5px;color:var(--steel-light);margin-top:2px;">Fully loaded avg</div>
+          </div>
+          <div style="background:rgba(196,136,58,0.1);border:1px solid var(--border-strong);border-radius:6px;padding:0.85rem;text-align:center;">
+            <div style="font-family:'Barlow Condensed',sans-serif;font-size:9px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--copper);margin-bottom:4px;">Setup B / bottle &#9733;</div>
+            <div style="font-family:'Playfair Display',serif;font-size:1.55rem;font-weight:700;color:var(--copper-light);">$8.26</div>
+            <div style="font-size:10.5px;color:var(--steel-light);margin-top:2px;">Fully loaded avg</div>
+          </div>
+        </div>
+        <div class="tbl-wrap" style="margin-bottom:0;">
+          <table class="dt" style="min-width:300px;">
+            <thead><tr><th>Spirit</th><th class="r">Wholesale</th><th class="r">Var+FET</th><th class="r">Margin/btl</th></tr></thead>
+            <tbody>
+              <tr><td>Bourbon</td><td class="r">$30.00</td><td class="r">$8.05</td><td class="r" style="color:var(--copper-light);">$21.95</td></tr>
+              <tr><td>Moonshine</td><td class="r">$14.00</td><td class="r">$6.15</td><td class="r" style="color:var(--copper-light);">$7.85</td></tr>
+              <tr><td>Rum</td><td class="r">$13.00</td><td class="r">$6.15</td><td class="r" style="color:var(--copper-light);">$6.85</td></tr>
+              <tr><td>Vodka</td><td class="r">$12.00</td><td class="r">$6.10</td><td class="r" style="color:var(--copper-light);">$5.90</td></tr>
+              <tr><td>Gin</td><td class="r">$20.00</td><td class="r">$6.65</td><td class="r" style="color:var(--copper-light);">$13.35</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Contract calc + volume discount stacked -->
+      <div style="display:flex;flex-direction:column;gap:1rem;">
+        <div class="eq-card" style="flex:0 0 auto;">
+          <div class="section-eyebrow" style="margin-bottom:0.6rem;">Contract Distilling — Setup B Upside</div>
+          <p style="font-size:12px;color:#B0A898;line-height:1.55;margin-bottom:0.85rem;"><strong style="color:var(--copper-light);">Not in P&amp;L</strong> — unmodeled revenue from Setup B's unused still capacity.</p>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;margin-bottom:0.85rem;">
+            <div class="fl" style="margin-bottom:0;"><div class="fl-l">Runs / week</div><input class="cn-inp" type="number" id="cRuns" value="2" min="1" max="5" oninput="updateContract()"></div>
+            <div class="fl" style="margin-bottom:0;"><div class="fl-l">$/proof gallon</div><input class="cn-inp" type="number" id="cRate" value="16" min="5" max="25" step="0.5" oninput="updateContract()"></div>
+            <div class="fl" style="margin-bottom:0;grid-column:1/-1;"><div class="fl-l">Proof gallons per run</div><input class="cn-inp" type="number" id="cPG" value="360" min="200" max="1200" step="10" oninput="updateContract()"></div>
+          </div>
+          <div style="background:linear-gradient(135deg,rgba(196,136,58,0.12),var(--dark-mid) 70%);border:1.5px solid var(--copper);border-radius:6px;padding:0.85rem 1rem;">
+            <div class="cr-lbl">Est. Annual Contract Revenue</div>
+            <div class="cr-val" id="contractRevenue" style="font-size:1.9rem;">$576,000</div>
+            <div class="cr-note">5-year total: <strong style="color:var(--copper-light);" id="contract5yr">$2,880,000</strong> unmodeled</div>
+          </div>
+        </div>
+
+        <div class="eq-card" style="flex:1;">
+          <div class="section-eyebrow" style="margin-bottom:0.5rem;">Volume Discount — Setup B</div>
+          <p style="font-size:12.5px;color:#B0A898;line-height:1.65;">At 2&#215; production, Setup B can negotiate a 5&#8211;10% discount on raw materials &amp; packaging. At 5%: cost drops from $8.26 &#8594; <strong style="color:var(--copper-light);">$7.97/bottle</strong>, saving ~<strong style="color:var(--copper-light);">$223,734/yr</strong> &#8212; an additional <strong style="color:var(--copper-light);">$1.12M</strong> over 5 years, also excluded from base P&amp;L projections.</p>
+        </div>
+      </div>
+
     </div>
+
   </div>
   <footer class="site-footer">
-    <div>Bridgetown Brew Systems &nbsp;·&nbsp; <a href="https://bridgetownbrew.com">bridgetownbrew.com</a></div>
-    <div>Contract revenue excluded from P&amp;L — unmodeled upside for Setup B only.</div>
+    <div>Bridgetown Brew Systems &nbsp;&#183;&nbsp; <a href="https://bridgetownbrew.com">bridgetownbrew.com</a></div>
+    <div>Contract distilling &amp; volume discounts excluded from P&amp;L &#8212; unmodeled upside for Setup B only.</div>
   </footer>
 </div>
 
@@ -825,13 +885,83 @@ function resetROI() {
 }
 
 function updateContract() {
-  const r=+document.getElementById('cRuns').value||2;
-  const rate=+document.getElementById('cRate').value||16;
-  const pg=+document.getElementById('cPG').value||360;
-  document.getElementById('contractRevenue').textContent=FMT(r*rate*pg*50);
+  const r   = +document.getElementById('cRuns').value  || 2;
+  const rate= +document.getElementById('cRate').value  || 16;
+  const pg  = +document.getElementById('cPG').value    || 360;
+  const annual = r * rate * pg * 50;
+  document.getElementById('contractRevenue').textContent = FMT(annual);
+  document.getElementById('contract5yr').textContent     = FMT(annual * 5);
 }
 
-setTimeout(updateROI, 400);
+function initVolChart() {
+  const ctx = document.getElementById('volChart');
+  if (!ctx) return;
+  const labels  = ['50K','100K','150K','200K','300K','378K','500K','600K','756K'];
+  const profitA = [-245761, 408478, 1062717, 1716957, 3025435, 4049123, 4049123, 4049123, 4049123];
+  const profitB = [-365761, 288478, 942717,  1596957, 2905435, 3929123, 5522391, 6830870, 8878246];
+  const notes   = ['Just getting started','Building distribution','Growing steadily',
+    'Solid operation','Strong sales','Setup A single-shift max',
+    "Beyond Setup A's ceiling",'Requires 2nd shift on A','Setup B single-shift max'];
+
+  new Chart(ctx.getContext('2d'), {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [
+        { label:'Setup A', data:profitA, borderColor:'#7A7068',
+          backgroundColor:'rgba(122,112,104,0.07)', borderWidth:2.5,
+          pointRadius:5, pointBackgroundColor:'#7A7068', tension:0.2, fill:false },
+        { label:'Setup B', data:profitB, borderColor:'#C4883A',
+          backgroundColor:'rgba(196,136,58,0.07)', borderWidth:2.5,
+          pointRadius:5, pointBackgroundColor:'#C4883A', tension:0.2, fill:false }
+      ]
+    },
+    options: {
+      responsive:true, maintainAspectRatio:false,
+      plugins: {
+        legend:{ display:false },
+        tooltip:{ callbacks:{
+          label: c => c.dataset.label+': '+FMT(c.raw),
+          afterBody: items => ['\u2192 '+notes[items[0].dataIndex]]
+        }}
+      },
+      scales: {
+        x:{ ticks:{ color:'#7A7068', font:{family:'Barlow Condensed',size:11} },
+            grid:{ color:'rgba(196,136,58,0.08)' },
+            title:{ display:true, text:'Annual Bottles Sold', color:'#7A7068',
+                    font:{family:'Barlow Condensed',size:11,weight:'600'}, padding:{top:6} } },
+        y:{ ticks:{ color:'#7A7068', font:{family:'Barlow Condensed',size:10},
+                    callback: v => v>=1000000 ? '$'+(v/1000000).toFixed(1)+'M' : '$'+(v/1000).toFixed(0)+'K' },
+            grid:{ color:'rgba(196,136,58,0.08)' },
+            title:{ display:true, text:'Annual Operating Profit', color:'#7A7068',
+                    font:{family:'Barlow Condensed',size:11,weight:'600'} } }
+      }
+    },
+    plugins:[{
+      id:'ceiling',
+      afterDraw(chart){
+        const { ctx:c, chartArea:{top,bottom}, scales:{x} } = chart;
+        const xp = x.getPixelForValue(5); // index 5 = 378K (Setup A max)
+        c.save();
+        c.setLineDash([5,4]);
+        c.strokeStyle='rgba(196,136,58,0.55)';
+        c.lineWidth=1.5;
+        c.beginPath(); c.moveTo(xp,top); c.lineTo(xp,bottom); c.stroke();
+        c.setLineDash([]);
+        c.font='600 10px Barlow Condensed';
+        c.fillStyle='rgba(196,136,58,0.75)';
+        c.textAlign='center';
+        c.fillText('Setup A ceiling',xp,top+11);
+        const xEnd = x.getPixelForValue(8);
+        c.fillStyle='rgba(196,136,58,0.035)';
+        c.fillRect(xp,top,xEnd-xp,bottom-top);
+        c.restore();
+      }
+    }]
+  });
+}
+
+setTimeout(() => { updateROI(); initVolChart(); }, 400);
 </script>
 </body>
 </html>
